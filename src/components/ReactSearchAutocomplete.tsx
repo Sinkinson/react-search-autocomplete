@@ -22,7 +22,7 @@ export interface ReactSearchAutocompleteProps<T> {
   inputDebounce?: number
   onSearch?: (keyword: string, results: T[]) => void
   onHover?: (result: T) => void
-  onSelect?: (result: T) => void
+  onSelect?: (result: any) => void
   onFocus?: FocusEventHandler<HTMLInputElement>
   onClear?: Function
   showIcon?: boolean
@@ -202,7 +202,7 @@ export default function ReactSearchAutocomplete<T>({
             setSearchString(results[highlightedItem][resultStringKeyName])
             onSearch(results[highlightedItem][resultStringKeyName], results)
           } else {
-            onSearch(searchString, results)
+            onSelect(results) // changed to pass all results to onSelect
           }
           setHighlightedItem(-1)
           eraseResults()
